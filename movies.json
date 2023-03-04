@@ -1,0 +1,133 @@
+{
+  "openapi": "3.0.3",
+  "options": {
+     "info": {
+    "title": "Movies W9",
+    "description": "Week9 API",
+    "contact": {
+      "email": "alam@yahoo.com"
+    },
+    "version": "1.0.11"
+   }
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000"
+    }
+  ],
+  "paths": {
+    "/movies": {
+      "get": {
+        "summary": "find all movies",
+        "tags": [
+          "movies"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Find Movies",
+            "content": {
+              "application/json": null,
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Movies"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "create movie",
+        "tags": [
+          "movies"
+        ],
+        "requestBody": {
+          "description": "Create new movie",
+          "content": {
+            "application/json": null,
+            "schema": {
+              "$ref": "#/components/schemas/Movies"
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successfull create movie",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Movies"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "/movies/{movieId}": {
+    "get": {
+      "summary": "find by id",
+      "tags": [
+        "movies"
+      ],
+      "parameters": [
+        {
+          "name": "movieId",
+          "in": "path",
+          "schema": {
+            "type": "integer"
+          },
+          "required": true
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "successful find movie by id",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Movies"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "movies": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 1
+          },
+          "title": {
+            "type": "string",
+            "example": "Reckless"
+          },
+          "genres": {
+            "type": "string",
+            "example": "Comedy"
+          },
+          "year": {
+            "type": "integer",
+            "example": 2001
+          }
+        }
+      },
+      "Success": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "succesful"
+          }
+        }
+      }
+    }
+  }
+}
